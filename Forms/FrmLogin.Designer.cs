@@ -1,6 +1,6 @@
 ﻿namespace eShift.Forms
 {
-    partial class Login
+    partial class FrmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +55,26 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(30, 393);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(180, 34);
+            this.btnRegister.TabIndex = 9;
+            this.btnRegister.Text = "Create New Acount";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(62, 361);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 16);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "New to eShift?";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -65,24 +85,15 @@
             this.label1.Text = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 353);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(322, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(535, 40);
             this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.label3.Text = "LOGIN TO YOUR ACCOUNT...";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
@@ -130,18 +141,9 @@
             this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(30, 393);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(180, 34);
-            this.btnRegister.TabIndex = 9;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
-            // Login
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,8 +155,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
-            this.Name = "Login";
-            this.Text = "FrmLogin";
+            this.Name = "FrmLogin";
+            this.Text = "Login to eShift";
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

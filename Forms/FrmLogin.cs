@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace eShift.Forms
 {
-    public partial class Login: Form
+    public partial class FrmLogin: Form
     {
-        public Login()
+        public FrmLogin()
         {
             InitializeComponent();
         }
@@ -34,7 +34,9 @@ namespace eShift.Forms
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-
+            FrmRegister registerForm = new FrmRegister();
+            this.Hide();
+            registerForm.Show();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -60,6 +62,13 @@ namespace eShift.Forms
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            FrmCustomerDashboard dashboard = new FrmCustomerDashboard();
+            dashboard.Show();
+            this.Hide();    
         }
     }
 }

@@ -58,17 +58,18 @@
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(180, 34);
             this.btnRegister.TabIndex = 9;
-            this.btnRegister.Text = "Register";
+            this.btnRegister.Text = "Login to Account";
             this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 353);
+            this.label2.Location = new System.Drawing.Point(72, 374);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.Size = new System.Drawing.Size(92, 16);
             this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.label2.Text = "Existing User?";
             // 
             // label1
             // 
@@ -78,6 +79,7 @@
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnLogin
             // 
@@ -87,6 +89,7 @@
             this.btnLogin.TabIndex = 12;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // textBox1
             // 
@@ -108,11 +111,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(346, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(488, 40);
             this.label3.TabIndex = 9;
-            this.label3.Text = "label3";
+            this.label3.Text = "CREATE NEW ACCOUNT...";
             // 
             // FrmRegister
             // 
@@ -125,7 +129,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Name = "FrmRegister";
-            this.Text = "FrmRegister";
+            this.Text = "Register to eShift";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

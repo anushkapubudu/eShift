@@ -16,7 +16,7 @@ namespace eShift
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.Login());
+            Application.Run(new Forms.FrmLogin());
         }
     }
 }

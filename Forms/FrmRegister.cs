@@ -16,5 +16,22 @@ namespace eShift.Forms
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            FrmLogin loginForm = new FrmLogin();
+            this.Hide();
+            loginForm.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
