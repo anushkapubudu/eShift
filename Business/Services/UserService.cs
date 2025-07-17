@@ -14,15 +14,16 @@ namespace eShift.Business.Services
             _userRepo = userRepo;
         }
 
-        User IUserService.Login(string email, string plainPassword)
+
+        LoginResult IUserService.Login(string email, string plainPassword)
         {
             var user = _userRepo.GetUserByEmail(email);
             if (user == null)
-                return null;
+                return LoginResult.UserNotExit;
 
             return PasswordUtil.Instance.VerifyPassword(plainPassword, user.PasswordHash)
-                   ? user
-                   : null;
+                   ? LoginResult.Success
+                   : LoginResult.InvalidEmailOrPassword;
         }
 
         RegistrationResult IUserService.RegisterUser(User user, string plainPassword)
@@ -38,5 +39,12 @@ namespace eShift.Business.Services
 
             return RegistrationResult.Success;
         }
+
+        public User GetUserDetails(string email)
+        {
+            return _userRepo.GetUserByEmail(email);
+        }
+
+
     }
 }

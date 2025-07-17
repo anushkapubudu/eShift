@@ -1,74 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eShift.Business.Interface;
+using eShift.Business.Services;
+using eShift.Repository.Interface;
+using eShift.Repository.Services;
+using eShift.Utilities;
+using System;
 using System.Windows.Forms;
 
 namespace eShift.Forms
 {
-    public partial class FrmLogin: Form
+    public partial class FrmLogin : Form
     {
+        private readonly IUserService _userService;
         public FrmLogin()
         {
             InitializeComponent();
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            IUserRepository userRepo = new UserRepository();
+            _userService = new UserService(userRepo);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
             FrmRegister registerForm = new FrmRegister();
-            this.Hide();
             registerForm.Show();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
+            this.Hide();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            FrmCustomerDashboard dashboard = new FrmCustomerDashboard();
-            dashboard.Show();
-            this.Hide();    
+            string email = txtEmail.Text.Trim().ToLower();
+            string password = txtPassword.Text.Trim();
+
+            // Basic required field check
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter both email and password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Email format validation
+            if (!ValidationUtil.IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var result = _userService.Login(email, password);
+
+                if (result == LoginResult.Success)
+                {   // Get the logged in user details
+                    var user = _userService.GetUserDetails(email);
+                    if (user != null)
+                    {
+                        // redirect to the dashboard based on user role
+                        if (user.Role == "Customer")
+                        {
+                            FrmCustomerDashboard customerDashboard = new FrmCustomerDashboard();
+                            this.Hide(); 
+                            customerDashboard.Show();
+                        
+                        }
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unexpected error occurred. Please try again later.", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Login Exception: {ex.Message}");
+            }
         }
     }
 }

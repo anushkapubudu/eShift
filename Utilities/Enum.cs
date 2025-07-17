@@ -11,9 +11,8 @@
     public enum LoginResult
     {
         Success,
-        InvalidEmailOrPassword,
         UserNotExit,
-        Failure
+        InvalidEmailOrPassword
     }
 
     public enum UserRole
