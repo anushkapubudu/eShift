@@ -56,7 +56,7 @@ namespace eShift.Forms
                         // redirect to the dashboard based on user role
                         if (user.Role == "Customer")
                         {
-                            FrmCustomerDashboard customerDashboard = new FrmCustomerDashboard();
+                            FrmCustomerDashboard customerDashboard = new FrmCustomerDashboard(user.Email);
                             this.Hide(); 
                             customerDashboard.Show();
                         

@@ -3,6 +3,7 @@ using eShift.Repository.Interface;
 using eShift.Utilities;
 using System;
 using System.Data.SqlClient;
+using System.Text;
 
 
 namespace eShift.Repository.Services
@@ -73,6 +74,57 @@ namespace eShift.Repository.Services
                 conn.Open();
                 int count = (int)cmd.ExecuteScalar();
                 return count > 0;
+            }
+        }
+
+        bool IUserRepository.IsEmailTakenByAnother(string email, int userId)
+        {
+            var query = @"SELECT COUNT(*) FROM Users 
+                  WHERE Email = @Email AND UserId <> @UserId";
+
+            using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        bool IUserRepository.UpdateUser(User user)
+        {
+            var query = new StringBuilder();
+            query.Append("UPDATE Users SET ");
+            query.Append("FirstName = @FirstName, ");
+            query.Append("LastName = @LastName, ");
+            query.Append("Email = @Email, ");
+            query.Append("Telephone = @Telephone, ");
+            query.Append("Address = @Address, ");
+
+            if (user.PasswordHash != null)
+                query.Append("PasswordHash = @PasswordHash, ");
+
+            query.Append("UpdatedAt = SYSDATETIME() ");
+            query.Append("WHERE UserId = @UserId");
+
+            using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query.ToString(), conn))
+            {
+                cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
+                cmd.Parameters.AddWithValue("@LastName", user.LastName);
+                cmd.Parameters.AddWithValue("@Email", user.Email);
+                cmd.Parameters.AddWithValue("@Telephone", user.Telephone);
+                cmd.Parameters.AddWithValue("@Address", user.Address);
+                cmd.Parameters.AddWithValue("@UserId", user.UserId);
+
+                if (user.PasswordHash != null)
+                    cmd.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
     }

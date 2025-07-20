@@ -12,5 +12,7 @@ namespace eShift.Repository.Interface
         void CreateUser(User user);                 
         User GetUserByEmail(string email);           
         bool IsEmailTaken(string email);
+        bool IsEmailTakenByAnother(string email, int userId);
+        bool UpdateUser(User user);
     }
 }

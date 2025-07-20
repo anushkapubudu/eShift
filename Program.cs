@@ -16,7 +16,7 @@ namespace eShift
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.FrmLogin());
+            Application.Run(new Forms.FrmCustomerDashboard("anushka3@gmail.com"));
         }
     }
 }

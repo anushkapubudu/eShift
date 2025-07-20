@@ -45,6 +45,20 @@ namespace eShift.Business.Services
             return _userRepo.GetUserByEmail(email);
         }
 
+        public CustomerUpdateResult UpdateCustomerProfile(User updatedUser)
+        {
+            if (string.IsNullOrWhiteSpace(updatedUser.Email) ||
+         string.IsNullOrWhiteSpace(updatedUser.FirstName) || 
+         string.IsNullOrWhiteSpace(updatedUser.LastName) || 
+         string.IsNullOrWhiteSpace(updatedUser.Telephone) || 
+         string.IsNullOrWhiteSpace(updatedUser.Address))
+                return CustomerUpdateResult.ValidationError;
 
+            if (_userRepo.IsEmailTakenByAnother(updatedUser.Email, updatedUser.UserId))
+                return CustomerUpdateResult.EmailInUse;
+
+            bool updated = _userRepo.UpdateUser(updatedUser);
+            return updated ? CustomerUpdateResult.Success : CustomerUpdateResult.Failure;
+        }
     }
 }

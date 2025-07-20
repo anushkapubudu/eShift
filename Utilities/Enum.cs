@@ -15,18 +15,21 @@
         InvalidEmailOrPassword
     }
 
-    public enum UserRole
+    public enum CustomerUpdateResult
     {
-        Admin,
-        Staff,
-        Customer
+        Success,
+        EmailInUse,
+        ValidationError,
+        Failure
     }
 
-    public enum ShiftStatus
+    public enum JobStatus
     {
-        Pending,
-        Scheduled,
-        Completed,
-        Cancelled
+        Draft,        
+        Pending,       
+        InProgress,    
+        Completed,     
+        Cancelled      
     }
+
 }
