@@ -11,6 +11,7 @@ namespace eShift.Model
         public int JobId { get; set; }
         public string JobNumber { get; set; }
         public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public string PickupLocation { get; set; }
         public string DropoffLocation { get; set; }
         public string JobDescription { get; set; }

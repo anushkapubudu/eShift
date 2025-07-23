@@ -12,6 +12,7 @@ namespace eShift.Business.Interface
         List<Job> GetJobRequestsByCustomerId(int customerId);         
         List<Job> GetAllJobs();                                        
         void UpdateJobDetails(Job updatedJob);                         
-        void ChangeJobStatus(int jobId, JobStatus newStatus);         
+        void ChangeJobStatus(int jobId, JobStatus newStatus);
+        void DeleteJob(int jobId);
     }
 }

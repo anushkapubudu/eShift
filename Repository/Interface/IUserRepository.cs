@@ -9,7 +9,8 @@ namespace eShift.Repository.Interface
 {
     interface IUserRepository
     {
-        void CreateUser(User user);                 
+        void CreateUser(User user);
+        List<User> GetAllUsers();
         User GetUserByEmail(string email);           
         bool IsEmailTaken(string email);
         bool IsEmailTakenByAnother(string email, int userId);

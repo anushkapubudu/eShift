@@ -66,6 +66,24 @@
     <Compile Include="Business\Interface\IUserService.cs" />
     <Compile Include="Business\Services\JobService.cs" />
     <Compile Include="Business\Services\UserService.cs" />
+    <Compile Include="Forms\Admin\FrmAdminDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminDashboard.Designer.cs">
+      <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageJobs.Designer.cs">
+      <DependentUpon>FrmAdminManageJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminSummery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminSummery.Designer.cs">
+      <DependentUpon>FrmAdminSummery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CustomerJobCreateUpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +127,7 @@
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Container.cs" />
+    <Compile Include="Model\CustomerSelection.cs" />
     <Compile Include="Model\Invoice.cs" />
     <Compile Include="Model\Job.cs" />
     <Compile Include="Model\Load.cs" />
@@ -127,6 +146,15 @@
     <Compile Include="Utilities\Enum.cs" />
     <Compile Include="Utilities\PasswordUtil.cs" />
     <Compile Include="Utilities\ValidationUtil.cs" />
+    <EmbeddedResource Include="Forms\Admin\FrmAdminDashboard.resx">
+      <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminManageJobs.resx">
+      <DependentUpon>FrmAdminManageJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminSummery.resx">
+      <DependentUpon>FrmAdminSummery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerJobCreateUpdateForm.resx">
       <DependentUpon>CustomerJobCreateUpdateForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,5 +1,6 @@
 ﻿using eShift.Business.Interface;
 using eShift.Model;
+using eShift.Repository;
 using eShift.Repository.Interface;
 using eShift.Utilities;
 using System;
@@ -77,6 +78,11 @@ namespace eShift.Business.Services
         {
             int latestId = _jobRepo.GetLastJobId();
             return $"JOB{latestId + 1:0000}";
+        }
+
+        public void DeleteJob(int jobId)
+        {
+            _jobRepo.DeleteJob(jobId);
         }
     }
 }

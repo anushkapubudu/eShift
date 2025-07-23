@@ -14,5 +14,6 @@ namespace eShift.Business.Interface
         LoginResult Login(string email, string plainPassword);
         User GetUserDetails(string email);
         CustomerUpdateResult UpdateCustomerProfile(User updatedUser);
+        List<CustomerSelection> GetAllCustomerSelection();
     }
 }

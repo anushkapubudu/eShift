@@ -14,5 +14,6 @@ namespace eShift.Repository.Interface
         bool UpdateJob(Job updatedJob);              // Modify pickup/dropoff/description
         bool UpdateJobStatus(int jobId, JobStatus newStatus); // Update only status
         int GetLastJobId();                          // For auto-generating JobNumber
+        void DeleteJob(int jobId);                   // delete job
     }
 }

@@ -83,10 +83,14 @@ namespace eShift.Repository
         public List<Job> GetJobRequestsByCustomerId(int customerId)
         {
             var jobs = new List<Job>();
-            var query = @"SELECT * FROM Job 
-                          WHERE CustomerId = @CustomerId 
-                            AND JobStatus IN ('Pending', 'Draft') 
-                            AND DeletedAt IS NULL";
+
+            var query = @"
+                        SELECT j.*, (u.FirstName + ' ' + u.LastName) AS CustomerName
+                        FROM Job j
+                        INNER JOIN Users u ON j.CustomerId = u.UserId
+                        WHERE j.CustomerId = @CustomerId
+                        AND j.JobStatus IN ('Pending', 'Draft')
+                        AND j.DeletedAt IS NULL";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, conn))
@@ -97,17 +101,22 @@ namespace eShift.Repository
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
-                        jobs.Add(MapJob(reader));
+                        jobs.Add(MapJob(reader)); 
                 }
             }
 
             return jobs;
         }
 
+
         public List<Job> GetAllJobs()
         {
             var jobs = new List<Job>();
-            var query = @"SELECT * FROM Job WHERE DeletedAt IS NULL";
+            var query = @"
+                        SELECT j.*, (u.FirstName + ' ' + u.LastName) AS CustomerName
+                        FROM Job j
+                        INNER JOIN Users u ON j.CustomerId = u.UserId
+                        WHERE j.DeletedAt IS NULL";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, conn))
@@ -122,6 +131,7 @@ namespace eShift.Repository
 
             return jobs;
         }
+
 
         public bool UpdateJob(Job updatedJob)
         {
@@ -179,6 +189,20 @@ namespace eShift.Repository
             }
         }
 
+        public void DeleteJob(int jobId)
+        {
+            var query = "UPDATE Job SET DeletedAt = GETDATE() WHERE JobId = @JobId";
+
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@JobId", jobId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
         private Job MapJob(SqlDataReader reader)
         {
             return new Job
@@ -192,6 +216,7 @@ namespace eShift.Repository
                 StartDate = Convert.ToDateTime(reader["StartDate"]),
                 EndDate = Convert.ToDateTime(reader["EndDate"]),
                 JobStatus = reader["JobStatus"].ToString(),
+                CustomerName = reader["CustomerName"].ToString(),
             };
         }
     }

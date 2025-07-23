@@ -2,6 +2,7 @@
 using eShift.Repository.Interface;
 using eShift.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -31,6 +32,33 @@ namespace eShift.Repository.Services
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        List<User> IUserRepository.GetAllUsers()
+        {
+            var users = new List<User>();
+            var query = "SELECT UserId, FirstName, LastName, Role FROM Users";
+
+            using (var conn = new SqlConnection(DbConst.ConnectionString))
+            using (var cmd = new SqlCommand(query, conn))
+            {
+                conn.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        users.Add(new User
+                        {
+                            UserId = Convert.ToInt32(reader["UserId"]),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            Role = reader["Role"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return users;
         }
 
         User IUserRepository.GetUserByEmail(string email)

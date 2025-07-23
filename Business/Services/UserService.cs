@@ -1,7 +1,10 @@
 ﻿using eShift.Business.Interface;
 using eShift.Model;
 using eShift.Repository.Interface;
+using eShift.Repository.Services;
 using eShift.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace eShift.Business.Services
 {
@@ -48,9 +51,9 @@ namespace eShift.Business.Services
         public CustomerUpdateResult UpdateCustomerProfile(User updatedUser)
         {
             if (string.IsNullOrWhiteSpace(updatedUser.Email) ||
-         string.IsNullOrWhiteSpace(updatedUser.FirstName) || 
-         string.IsNullOrWhiteSpace(updatedUser.LastName) || 
-         string.IsNullOrWhiteSpace(updatedUser.Telephone) || 
+         string.IsNullOrWhiteSpace(updatedUser.FirstName) ||
+         string.IsNullOrWhiteSpace(updatedUser.LastName) ||
+         string.IsNullOrWhiteSpace(updatedUser.Telephone) ||
          string.IsNullOrWhiteSpace(updatedUser.Address))
                 return CustomerUpdateResult.ValidationError;
 
@@ -60,5 +63,18 @@ namespace eShift.Business.Services
             bool updated = _userRepo.UpdateUser(updatedUser);
             return updated ? CustomerUpdateResult.Success : CustomerUpdateResult.Failure;
         }
+
+
+        public List<CustomerSelection> GetAllCustomerSelection()
+        {
+            return _userRepo.GetAllUsers().Select(u => new CustomerSelection
+            {
+                UserId = u.UserId,
+                FullName = $"{u.FirstName} {u.LastName}"
+            })
+                .ToList();
+        }
+
+
     }
 }
