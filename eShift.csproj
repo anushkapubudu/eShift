@@ -62,9 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Interface\IContainerService.cs" />
     <Compile Include="Business\Interface\IJobService.cs" />
+    <Compile Include="Business\Interface\IStaffService.cs" />
+    <Compile Include="Business\Interface\ITransportUnitService.cs" />
     <Compile Include="Business\Interface\IUserService.cs" />
+    <Compile Include="Business\Services\ContainerService.cs" />
     <Compile Include="Business\Services\JobService.cs" />
+    <Compile Include="Business\Services\StaffService.cs" />
+    <Compile Include="Business\Services\TransportUnitService.cs" />
     <Compile Include="Business\Services\UserService.cs" />
     <Compile Include="Forms\Admin\FrmAdminDashboard.cs">
       <SubType>Form</SubType>
@@ -72,11 +78,41 @@
     <Compile Include="Forms\Admin\FrmAdminDashboard.Designer.cs">
       <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Admin\FrmAdminJobUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminJobUpdate.Designer.cs">
+      <DependentUpon>FrmAdminJobUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageContainer.Designer.cs">
+      <DependentUpon>FrmAdminManageContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageCustomers.Designer.cs">
+      <DependentUpon>FrmAdminManageCustomers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\FrmAdminManageJobs.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Admin\FrmAdminManageJobs.Designer.cs">
       <DependentUpon>FrmAdminManageJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageStaff.Designer.cs">
+      <DependentUpon>FrmAdminManageStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageVehicle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmAdminManageVehicle.Designer.cs">
+      <DependentUpon>FrmAdminManageVehicle.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\FrmAdminSummery.cs">
       <SubType>Form</SubType>
@@ -138,10 +174,20 @@
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Interface\IContainerRepository.cs" />
     <Compile Include="Repository\Interface\IJobRepository.cs" />
+    <Compile Include="Repository\Interface\IStaffRepository.cs" />
+    <Compile Include="Repository\Interface\ITransportUnitRepository.cs" />
     <Compile Include="Repository\Interface\IUserRepository.cs" />
+    <Compile Include="Business\Interface\IVehicleService.cs" />
+    <Compile Include="Repository\Interface\IVehicleRepository.cs" />
+    <Compile Include="Repository\Services\ContainerRepository.cs" />
     <Compile Include="Repository\Services\JobRepository.cs" />
+    <Compile Include="Repository\Services\StaffRepository.cs" />
+    <Compile Include="Repository\Services\TransportUnitRepository.cs" />
     <Compile Include="Repository\Services\UserRepository.cs" />
+    <Compile Include="Business\Services\VehicleService.cs" />
+    <Compile Include="Repository\Services\VehicleRepository.cs" />
     <Compile Include="Utilities\DbConst.cs" />
     <Compile Include="Utilities\Enum.cs" />
     <Compile Include="Utilities\PasswordUtil.cs" />
@@ -149,8 +195,23 @@
     <EmbeddedResource Include="Forms\Admin\FrmAdminDashboard.resx">
       <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminJobUpdate.resx">
+      <DependentUpon>FrmAdminJobUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminManageContainer.resx">
+      <DependentUpon>FrmAdminManageContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminManageCustomers.resx">
+      <DependentUpon>FrmAdminManageCustomers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\FrmAdminManageJobs.resx">
       <DependentUpon>FrmAdminManageJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminManageStaff.resx">
+      <DependentUpon>FrmAdminManageStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\FrmAdminManageVehicle.resx">
+      <DependentUpon>FrmAdminManageVehicle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\FrmAdminSummery.resx">
       <DependentUpon>FrmAdminSummery.cs</DependentUpon>

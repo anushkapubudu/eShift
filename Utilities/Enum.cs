@@ -25,11 +25,26 @@
 
     public enum JobStatus
     {
-        Draft,        
-        Pending,       
-        InProgress,    
-        Completed,     
-        Cancelled      
+        Draft,
+        Pending,
+        InProgress,
+        Completed,
+        Cancelled
+    }
+
+    public enum StaffType
+    {
+        DRIVER,
+        ASSISTANT
+    }
+
+    public enum ContainerType
+    {
+        Standard,
+        Refrigerated,
+        FlatRack,
+        OpenTop,
+        Tank
     }
 
 }

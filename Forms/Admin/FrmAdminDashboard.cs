@@ -46,6 +46,26 @@ namespace eShift.Forms.Admin
             LoadForm(new FrmAdminManageJobs());
         }
 
+        private void btnSidePanelManageStaff_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminManageStaff());
+        }
+
+        private void btnSidePanelManageVehicle_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminManageVehicle());
+        }
+
+        private void btnSidePanelmanageContainers_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminManageContainer());
+        }
+
+        private void btnSidePanelManageCustomer_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminManageCustomers());
+        }
+
         // This method loads the user name and user type 
         //private void LoadUserName(string email)
         //{

@@ -38,10 +38,13 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnSidePanelDahbord = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSidePanelManageVehicle = new System.Windows.Forms.Button();
+            this.btnSidePanelManageStaff = new System.Windows.Forms.Button();
             this.btnSidePanelManageJobs = new System.Windows.Forms.Button();
             this.btnSidePanelDashboard = new System.Windows.Forms.Button();
+            this.btnSidePanelManageCustomer = new System.Windows.Forms.Button();
+            this.btnSidePanelmanageContainers = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.sidePanel.SuspendLayout();
@@ -117,11 +120,14 @@
             this.sidePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.sidePanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.sidePanel.Controls.Add(this.button5);
+            this.sidePanel.Controls.Add(this.btnSidePanelmanageContainers);
+            this.sidePanel.Controls.Add(this.btnSidePanelManageCustomer);
             this.sidePanel.Controls.Add(this.pictureBox2);
             this.sidePanel.Controls.Add(this.btnLogOut);
             this.sidePanel.Controls.Add(this.btnSidePanelDahbord);
-            this.sidePanel.Controls.Add(this.button1);
-            this.sidePanel.Controls.Add(this.button3);
+            this.sidePanel.Controls.Add(this.btnSidePanelManageVehicle);
+            this.sidePanel.Controls.Add(this.btnSidePanelManageStaff);
             this.sidePanel.Controls.Add(this.btnSidePanelManageJobs);
             this.sidePanel.Controls.Add(this.btnSidePanelDashboard);
             this.sidePanel.Location = new System.Drawing.Point(0, 2);
@@ -133,7 +139,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(31, 15);
+            this.pictureBox2.Location = new System.Drawing.Point(45, 30);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(133, 80);
@@ -145,8 +151,8 @@
             // 
             this.btnLogOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnLogOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.InfoText;
-            this.btnLogOut.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogOut.Location = new System.Drawing.Point(5, 600);
+            this.btnLogOut.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.Location = new System.Drawing.Point(5, 608);
             this.btnLogOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(227, 50);
@@ -169,40 +175,42 @@
             this.btnSidePanelDahbord.UseVisualStyleBackColor = true;
             this.btnSidePanelDahbord.Click += new System.EventHandler(this.btnSidePanelDahbord_Click);
             // 
-            // button1
+            // btnSidePanelManageVehicle
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(5, 300);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(227, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "My Invoices";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSidePanelManageVehicle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelManageVehicle.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelManageVehicle.Image")));
+            this.btnSidePanelManageVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSidePanelManageVehicle.Location = new System.Drawing.Point(5, 300);
+            this.btnSidePanelManageVehicle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSidePanelManageVehicle.Name = "btnSidePanelManageVehicle";
+            this.btnSidePanelManageVehicle.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnSidePanelManageVehicle.Size = new System.Drawing.Size(227, 50);
+            this.btnSidePanelManageVehicle.TabIndex = 0;
+            this.btnSidePanelManageVehicle.Text = "Manage Vehicles";
+            this.btnSidePanelManageVehicle.UseVisualStyleBackColor = true;
+            this.btnSidePanelManageVehicle.Click += new System.EventHandler(this.btnSidePanelManageVehicle_Click);
             // 
-            // button3
+            // btnSidePanelManageStaff
             // 
-            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(5, 244);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(227, 50);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "My Jobs";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSidePanelManageStaff.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelManageStaff.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelManageStaff.Image")));
+            this.btnSidePanelManageStaff.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSidePanelManageStaff.Location = new System.Drawing.Point(5, 244);
+            this.btnSidePanelManageStaff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSidePanelManageStaff.Name = "btnSidePanelManageStaff";
+            this.btnSidePanelManageStaff.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnSidePanelManageStaff.Size = new System.Drawing.Size(227, 50);
+            this.btnSidePanelManageStaff.TabIndex = 0;
+            this.btnSidePanelManageStaff.Text = "Manage Staff";
+            this.btnSidePanelManageStaff.UseVisualStyleBackColor = true;
+            this.btnSidePanelManageStaff.Click += new System.EventHandler(this.btnSidePanelManageStaff_Click);
             // 
             // btnSidePanelManageJobs
             // 
-            this.btnSidePanelManageJobs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelManageJobs.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSidePanelManageJobs.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelManageJobs.Image")));
             this.btnSidePanelManageJobs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSidePanelManageJobs.Location = new System.Drawing.Point(5, 185);
+            this.btnSidePanelManageJobs.Location = new System.Drawing.Point(5, 186);
             this.btnSidePanelManageJobs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSidePanelManageJobs.Name = "btnSidePanelManageJobs";
             this.btnSidePanelManageJobs.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
@@ -214,17 +222,61 @@
             // 
             // btnSidePanelDashboard
             // 
-            this.btnSidePanelDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSidePanelDashboard.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelDashboard.Image")));
             this.btnSidePanelDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSidePanelDashboard.Location = new System.Drawing.Point(2, 465);
+            this.btnSidePanelDashboard.Location = new System.Drawing.Point(5, 524);
             this.btnSidePanelDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSidePanelDashboard.Name = "btnSidePanelDashboard";
             this.btnSidePanelDashboard.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.btnSidePanelDashboard.Size = new System.Drawing.Size(227, 50);
             this.btnSidePanelDashboard.TabIndex = 0;
-            this.btnSidePanelDashboard.Text = "Dashboard";
+            this.btnSidePanelDashboard.Text = "Reports";
             this.btnSidePanelDashboard.UseVisualStyleBackColor = true;
+            // 
+            // btnSidePanelManageCustomer
+            // 
+            this.btnSidePanelManageCustomer.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelManageCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelManageCustomer.Image")));
+            this.btnSidePanelManageCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSidePanelManageCustomer.Location = new System.Drawing.Point(6, 411);
+            this.btnSidePanelManageCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSidePanelManageCustomer.Name = "btnSidePanelManageCustomer";
+            this.btnSidePanelManageCustomer.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnSidePanelManageCustomer.Size = new System.Drawing.Size(227, 50);
+            this.btnSidePanelManageCustomer.TabIndex = 3;
+            this.btnSidePanelManageCustomer.Text = "Manage Customers";
+            this.btnSidePanelManageCustomer.UseVisualStyleBackColor = true;
+            this.btnSidePanelManageCustomer.Click += new System.EventHandler(this.btnSidePanelManageCustomer_Click);
+            // 
+            // btnSidePanelmanageContainers
+            // 
+            this.btnSidePanelmanageContainers.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSidePanelmanageContainers.Image = ((System.Drawing.Image)(resources.GetObject("btnSidePanelmanageContainers.Image")));
+            this.btnSidePanelmanageContainers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSidePanelmanageContainers.Location = new System.Drawing.Point(6, 356);
+            this.btnSidePanelmanageContainers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSidePanelmanageContainers.Name = "btnSidePanelmanageContainers";
+            this.btnSidePanelmanageContainers.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.btnSidePanelmanageContainers.Size = new System.Drawing.Size(227, 50);
+            this.btnSidePanelmanageContainers.TabIndex = 4;
+            this.btnSidePanelmanageContainers.Text = "Manage Containers";
+            this.btnSidePanelmanageContainers.UseVisualStyleBackColor = true;
+            this.btnSidePanelmanageContainers.Click += new System.EventHandler(this.btnSidePanelmanageContainers_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(6, 467);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button5.Name = "button5";
+            this.button5.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.button5.Size = new System.Drawing.Size(227, 50);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Manage Invoices";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // FrmAdminDashboard
             // 
@@ -256,9 +308,12 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnSidePanelDahbord;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSidePanelManageVehicle;
+        private System.Windows.Forms.Button btnSidePanelManageStaff;
         private System.Windows.Forms.Button btnSidePanelManageJobs;
         private System.Windows.Forms.Button btnSidePanelDashboard;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnSidePanelmanageContainers;
+        private System.Windows.Forms.Button btnSidePanelManageCustomer;
     }
 }

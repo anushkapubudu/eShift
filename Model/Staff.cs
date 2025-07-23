@@ -8,6 +8,10 @@ namespace eShift.Model
 {
     class Staff
     {
+
+        public string FullName => FirstName + " " + LastName;
+
+
         public int StaffId { get; set; }
         public string StaffNumber { get; set; }
         public string FirstName { get; set; }

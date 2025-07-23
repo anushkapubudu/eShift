@@ -9,11 +9,17 @@ namespace eShift.Model
     class TransportUnit
     {
         public int TransportUnitId { get; set; }
+        public int JobId { get; set; }                   
         public int VehicleId { get; set; }
         public int ContainerId { get; set; }
         public int DriverId { get; set; }
         public int? AssistantId { get; set; }
         public DateTime AssignedStart { get; set; }
         public DateTime? AssignedEnd { get; set; }
+        public bool IsFragile { get; set; }
+        public string ItemDescription { get; set; }
+        public int ItemCount { get; set; }
+        public int? Weight { get; set; }
     }
+
 }

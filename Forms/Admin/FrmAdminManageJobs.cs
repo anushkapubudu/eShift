@@ -105,6 +105,7 @@ namespace eShift.Forms.Admin
             }
             else
             {
+                dgvJobs.Columns.Clear();
                 dgvJobs.DataSource = filteredJobs;
                 FormatJobsGrid();
             }
@@ -187,7 +188,7 @@ namespace eShift.Forms.Admin
 
             var column = dgvJobs.Columns[e.ColumnIndex];
 
-            // Check if Delete button clicked
+            // Delete button Action
             if (column.Name == "Delete")
             {
                 var jobId = Convert.ToInt32(dgvJobs.Rows[e.RowIndex].Cells["JobId"].Value);
@@ -206,6 +207,20 @@ namespace eShift.Forms.Admin
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Delete failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+            // Update Button Action
+            if (column.Name == "Update")
+            {
+                var jobId = Convert.ToInt32(dgvJobs.Rows[e.RowIndex].Cells["JobId"].Value);
+                using (var updateForm = new FrmAdminJobUpdate(jobId))
+                {
+                    var result = updateForm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        ApplyJobFilters(); // refresh grid
                     }
                 }
             }

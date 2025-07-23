@@ -11,9 +11,11 @@ namespace eShift.Repository.Interface
     {
         void CreateUser(User user);
         List<User> GetAllUsers();
-        User GetUserByEmail(string email);           
+        User GetUserByEmail(string email);
+        User GetUserById(int userId);
         bool IsEmailTaken(string email);
         bool IsEmailTakenByAnother(string email, int userId);
         bool UpdateUser(User user);
+        void DeleteUser(int userId);
     }
 }

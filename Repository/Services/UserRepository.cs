@@ -5,12 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace eShift.Repository.Services
 {
     public class UserRepository : IUserRepository
     {
+       
+
         void IUserRepository.CreateUser(User user)
         {
             using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
@@ -37,7 +40,7 @@ namespace eShift.Repository.Services
         List<User> IUserRepository.GetAllUsers()
         {
             var users = new List<User>();
-            var query = "SELECT UserId, FirstName, LastName, Role FROM Users";
+            var query = "SELECT UserId, FirstName, LastName, Role, Email, Address, Telephone FROM Users";
 
             using (var conn = new SqlConnection(DbConst.ConnectionString))
             using (var cmd = new SqlCommand(query, conn))
@@ -52,6 +55,9 @@ namespace eShift.Repository.Services
                             UserId = Convert.ToInt32(reader["UserId"]),
                             FirstName = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            Address = reader["Address"].ToString(),
+                            Telephone = reader["Telephone"].ToString(),
                             Role = reader["Role"].ToString()
                         });
                     }
@@ -68,6 +74,36 @@ namespace eShift.Repository.Services
                 string query = "SELECT * FROM Users WHERE Email = @Email";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return new User
+                    {
+                        UserId = Convert.ToInt32(reader["UserId"]),
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        Address = reader["Address"].ToString(),
+                        Telephone = reader["Telephone"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        PasswordHash = reader["PasswordHash"].ToString(),
+                        Role = reader["Role"].ToString()
+                    };
+                }
+
+                return null;
+            }
+        }
+
+        User IUserRepository.GetUserById(int userId)
+        {
+            using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
+            {
+                string query = "SELECT * FROM Users WHERE UserId = @UserId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserId", userId);
 
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -121,6 +157,21 @@ namespace eShift.Repository.Services
                 return count > 0;
             }
         }
+
+        public void DeleteUser(int userId)
+        {
+            var query = "DELETE FROM [Users] WHERE UserId = @UserId";
+
+            using (var conn = new SqlConnection(DbConst.ConnectionString))
+            using (var cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
 
         bool IUserRepository.UpdateUser(User user)
         {

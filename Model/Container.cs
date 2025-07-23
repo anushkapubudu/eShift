@@ -8,6 +8,9 @@ namespace eShift.Model
 {
     class Container
     {
+
+        public string DisplayName => ContainerNo + " (" + ContainerType+")";
+
         public int ContainerId { get; set; }
         public string ContainerNo { get; set; }
         public string ContainerType { get; set; }

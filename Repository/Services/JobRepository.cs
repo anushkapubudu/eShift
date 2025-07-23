@@ -42,7 +42,9 @@ namespace eShift.Repository
 
         public Job GetJobById(int jobId)
         {
-            var query = @"SELECT * FROM Job WHERE JobId = @JobId AND DeletedAt IS NULL";
+            var query = @"SELECT j.*, (u.FirstName + ' ' + u.LastName) AS CustomerName
+                        FROM Job j
+                        INNER JOIN Users u ON j.CustomerId = u.UserId WHERE JobId = @JobId AND DeletedAt IS NULL";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, conn))
@@ -62,7 +64,9 @@ namespace eShift.Repository
         public List<Job> GetJobsByCustomerId(int customerId)
         {
             var jobs = new List<Job>();
-            var query = @"SELECT * FROM Job WHERE CustomerId = @CustomerId AND DeletedAt IS NULL";
+            var query = @"SELECT j.*, (u.FirstName + ' ' + u.LastName) AS CustomerName
+                        FROM Job j
+                        INNER JOIN Users u ON j.CustomerId = u.UserId WHERE CustomerId = @CustomerId AND DeletedAt IS NULL";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, conn))
@@ -141,6 +145,7 @@ namespace eShift.Repository
                             JobDescription = @JobDescription,
                             StartDate = @StartDate,
                             EndDate = @EndDate,
+                            JobStatus = @JobStatus,
                             UpdatedAt = SYSDATETIME()
                           WHERE JobId = @JobId AND DeletedAt IS NULL";
 
@@ -153,6 +158,7 @@ namespace eShift.Repository
                 cmd.Parameters.AddWithValue("@StartDate", updatedJob.StartDate);
                 cmd.Parameters.AddWithValue("@EndDate", updatedJob.EndDate);
                 cmd.Parameters.AddWithValue("@JobId", updatedJob.JobId);
+                cmd.Parameters.AddWithValue("@JobStatus", updatedJob.JobStatus);
 
                 conn.Open();
                 return cmd.ExecuteNonQuery() > 0;

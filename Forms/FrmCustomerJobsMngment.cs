@@ -31,6 +31,9 @@ namespace eShift.Forms
 
             // Hook action click handler
             dgvJobRequest.CellClick += dgvJobRequest_CellClick;
+
+            // Hook formatting after data load
+            dgvJobRequest.DataBindingComplete += (s, e) => HighlightStatusRows();
         }
 
         // Create new job button click
@@ -76,7 +79,7 @@ namespace eShift.Forms
                     {
                         Name = "Update",
                         HeaderText = "",
-                        Text = "🖊️",
+                        Text = "Edit",
                         UseColumnTextForButtonValue = true,
                         Width = 60
                     };
@@ -85,7 +88,7 @@ namespace eShift.Forms
                     {
                         Name = "Delete",
                         HeaderText = "",
-                        Text = "🗑️",
+                        Text = "Delete",
                         UseColumnTextForButtonValue = true,
                         Width = 60
                     };
@@ -105,7 +108,6 @@ namespace eShift.Forms
                     dgvJobRequest.Columns["Delete"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                     dgvJobRequest.Columns["Delete"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
-
 
                 // Auto adjust column widths
                 dgvJobRequest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -155,10 +157,10 @@ namespace eShift.Forms
                 }
             }
 
-           
+            // You can handle "Update" action here later if needed
         }
 
-        // Format and style the job grid
+        // Format basic grid layout
         private void FormatJobRequestGrid()
         {
             if (dgvJobRequest.Columns.Count == 0) return;
@@ -182,14 +184,18 @@ namespace eShift.Forms
             // Grid appearance settings
             dgvJobRequest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvJobRequest.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
 
-            // Highlight rows based on status
+        // Add status-based row colors after data is loaded
+        private void HighlightStatusRows()
+        {
             foreach (DataGridViewRow row in dgvJobRequest.Rows)
             {
-                var status = row.Cells["JobStatus"].Value?.ToString();
-                if (status == "Pending")
+                var status = row.Cells["JobStatus"].Value?.ToString()?.Trim();
+
+                if (string.Equals(status, "Pending", StringComparison.OrdinalIgnoreCase))
                     row.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
-                else if (status == "Draft")
+                else if (string.Equals(status, "Draft", StringComparison.OrdinalIgnoreCase))
                     row.DefaultCellStyle.BackColor = Color.LightGray;
             }
         }

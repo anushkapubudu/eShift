@@ -5,6 +5,7 @@ using eShift.Repository.Services;
 using eShift.Utilities;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace eShift.Business.Services
 {
@@ -75,6 +76,26 @@ namespace eShift.Business.Services
                 .ToList();
         }
 
+        public User GetUserById(int userId)
+        {
+            return _userRepo.GetUserById(userId);
+        }
 
+        public List<User> GetAllCustomers()
+        {
+            return _userRepo.GetAllUsers()
+                .Where(u => u.Role == "Customer")
+                .ToList();
+        }
+
+        public bool UpdateCustomer(User user)
+        {
+            return _userRepo.UpdateUser(user);
+        }
+
+        public void DeleteUser(int userId)
+        {
+            _userRepo.DeleteUser(userId);
+        }
     }
 }
