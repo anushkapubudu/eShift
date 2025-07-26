@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eShift.Utilities;
+using System;
 
 namespace eShift.Model
 {
-    class Payment
+    public class Payment
     {
         public int PaymentId { get; set; }
-        public int InvoiceId { get; set; }
-        public DateTime PaymentDate { get; set; }
+
+        public int InvoiceId { get; set; } 
+
+        public DateTime PaymentDate { get; set; } = DateTime.Today;
+
         public decimal Amount { get; set; }
-        public string Method { get; set; }
+
+        public PaymentMethod Method { get; set; } = PaymentMethod.Cash;
+
         public string ReferenceNo { get; set; }
-        public DateTime CreatedAt { get; set; }
+
+        public string Remarks { get; set; } 
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public DateTime? UpdatedAt { get; set; } 
     }
 }

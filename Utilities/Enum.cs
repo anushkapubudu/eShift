@@ -47,4 +47,23 @@
         Tank
     }
 
+    public enum InvoiceStatus
+    {
+        Draft,
+        Sent,
+        Paid,
+        Overdue,
+        Cancelled
+    }
+
+    public enum PaymentMethod
+    {
+        Cash,
+        BankTransfer,
+        CreditCard,
+        Cheque,
+        Other
+    }
+
+
 }
