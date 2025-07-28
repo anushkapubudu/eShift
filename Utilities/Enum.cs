@@ -65,5 +65,11 @@
         Other
     }
 
+    public enum ReportType
+    {
+        Revenue,
+        Customers,
+        Jobs
+    }
 
 }

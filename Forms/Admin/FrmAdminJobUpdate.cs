@@ -26,6 +26,7 @@ namespace eShift.Forms.Admin
         private readonly IVehicleService _vehicleService;
         private readonly IContainerService _containerService;
         private readonly ITransportUnitService _unitService;
+        private readonly IInvoiceService _invoiceService;
         private TransportUnit selectedUnit;
         private Job _job;
 
@@ -55,7 +56,12 @@ namespace eShift.Forms.Admin
             ITransportUnitRepository unitRepo = new TransportUnitRepository();
             _unitService = new TransportUnitService(unitRepo);
 
-            
+            IInvoiceRepository invoiceRepo = new InvoiceRepository();
+            IPaymentRepository paymentRepo = new PaymentRepository();
+            _invoiceService = new InvoiceService(invoiceRepo,paymentRepo);
+
+
+
 
             LoadJobDetails();
             LoadDrivers();
@@ -338,7 +344,14 @@ namespace eShift.Forms.Admin
                 try
                 {
                     _jobService.UpdateJobDetails(_job);
-                    MessageBox.Show("Job status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if(selectedStatus == JobStatus.Completed.ToString())
+                    {
+                        CreateDraftInvoice();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Job status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    } 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -350,6 +363,32 @@ namespace eShift.Forms.Admin
             else
             {
                 MessageBox.Show("Job status is already set to selected value.", "No Change", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+        void CreateDraftInvoice()
+        {
+            try
+            {
+                // Create invoice if job is completed
+                var invoice = new Invoice
+                {
+                    JobId = _job.JobId,
+                    CustomerId = _job.CustomerId,
+                    IssueDate = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(7),
+                    SubTotal = 0,
+                    TaxRate = 0,
+                    TotalAmount = 0,
+                    Status = InvoiceStatus.Draft,
+                };
+                _invoiceService.CreateInvoice(invoice);
+                MessageBox.Show("Job Updated and Draft Invoice created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to create draft invoice.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using eShift.Business.Interface;
 using eShift.Business.Services;
+using eShift.Forms.Admin;
 using eShift.Repository.Interface;
 using eShift.Repository.Services;
 using eShift.Utilities;
@@ -60,6 +61,11 @@ namespace eShift.Forms
                             this.Hide(); 
                             customerDashboard.Show();
                         
+                        }else if(user.Role == "ADMIN")
+                        {
+                            FrmAdminDashboard adminDashboard = new FrmAdminDashboard();
+                            this.Hide();
+                            adminDashboard.Show();
                         }
 
                     }

@@ -40,7 +40,7 @@ namespace eShift.Forms
             try
             {
                 var result = _userService.RegisterUser(user, plainPassword);
-                HandleRegistrationResult(result);
+                HandleRegistrationResult(result,user.Email);
             }
             catch (Exception ex)
             {
@@ -90,12 +90,15 @@ namespace eShift.Forms
             return true;
         }
 
-        private void HandleRegistrationResult(RegistrationResult result)
+        private void HandleRegistrationResult(RegistrationResult result, String UserEmail)
         {
             switch (result)
             {
                 case RegistrationResult.Success:
                     ShowMessage("Registration successful!");
+                    FrmCustomerDashboard customerDashboard = new FrmCustomerDashboard(UserEmail);
+                    this.Hide();
+                    customerDashboard.Show();
                     break;
                 case RegistrationResult.MissingFields:
                     ShowMessage("Please fill all required fields.");

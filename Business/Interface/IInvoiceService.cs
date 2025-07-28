@@ -15,11 +15,12 @@ namespace eShift.Business.Interface
         void DeleteInvoice(int invoiceId);
         Invoice GetInvoiceById(int invoiceId);
         List<Invoice> GetAllInvoices();
-
+        List<Invoice> GetInvoicesByCustomerId(int customerId);
         void ChangeInvoiceStatus(int invoiceId, InvoiceStatus newStatus);
         void AddPaymentToInvoice(int invoiceId, Payment payment);
         List<Payment> GetPaymentsForInvoice(int invoiceId);
-
         decimal CalculateRemainingBalance(int invoiceId);
+        
+
     }
 }

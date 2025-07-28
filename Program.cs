@@ -17,8 +17,10 @@ namespace eShift
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Forms.FrmCustomerDashboard("anushka3@gmail.com"));
-            Application.Run(new Forms.Admin.FrmAdminDashboard());
+            //'GlobalFontSettings' does not contain a definition for 'UseWindowsFonts'
+            PdfSharp.Fonts.GlobalFontSettings.UseWindowsFontsUnderWindows = true;
+            Application.Run(new Forms.FrmCustomerDashboard("anushka3@gmail.com"));
+            //Application.Run(new Forms.Admin.FrmAdminDashboard());
         }
     }
 }

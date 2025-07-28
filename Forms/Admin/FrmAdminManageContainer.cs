@@ -111,11 +111,7 @@ namespace eShift.Forms.Admin
             if (e.RowIndex >= 0)
             {
                 editingContainer = (Container)dtgvContainer.Rows[e.RowIndex].DataBoundItem;
-
-                // ✅ Format capacity as integer
                 txtCapacity.Text = ((int)Math.Floor(editingContainer.CapacityKg)).ToString();
-
-                // ✅ Parse string (from model) to enum
                 if (Enum.TryParse<ContainerType>(editingContainer.ContainerType, out var parsedType))
                 {
                     cmbContainerType.SelectedItem = parsedType;

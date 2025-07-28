@@ -1,6 +1,7 @@
 ﻿using eShift.Business.Interface;
 using eShift.Model;
 using eShift.Repository.Interface;
+using eShift.Repository.Services;
 using eShift.Utilities;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,16 @@ namespace eShift.Business.Services
 
         public void CreateInvoice(Invoice invoice)
         {
+            invoice.InvoiceNumber = GenerateInvoiceNumber();
             invoice.Status = InvoiceStatus.Draft;
             invoice.CreatedAt = DateTime.Now;
             _invoiceRepo.AddInvoice(invoice);
+        }
+
+        private string GenerateInvoiceNumber()
+        {
+            int latestId = _invoiceRepo.GetLastInvoiceId();
+            return $"INV{latestId + 1:0000}";
         }
 
         public bool UpdateInvoice(Invoice invoice)
@@ -34,9 +42,10 @@ namespace eShift.Business.Services
             if (existing == null) return false;
 
             existing.SubTotal = invoice.SubTotal;
-            //existing.Description = invoice.Description;
             existing.DueDate = invoice.DueDate;
             existing.Status = invoice.Status;
+            existing.JobId = invoice.JobId;
+            existing.TaxRate = invoice.TaxRate;
 
             _invoiceRepo.UpdateInvoice(existing);
             return true;
@@ -93,6 +102,11 @@ namespace eShift.Business.Services
             var paidAmount = payments.Sum(p => p.Amount);
 
             return invoice != null ? invoice.SubTotal - paidAmount : 0;
+        }
+
+        public List<Invoice> GetInvoicesByCustomerId(int customerId)
+        {
+            return _invoiceRepo.GetInvoicesByCustomerId(customerId);
         }
     }
 

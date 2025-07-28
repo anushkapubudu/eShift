@@ -129,7 +129,7 @@ namespace eShift.Forms.Admin
 
                 txtPlateNumber.Text = editingVehicle.PlateNumber;
                 txtVehicleType.Text = editingVehicle.VehicleType;
-                txtCapacity.Text = editingVehicle.CapacityKg.ToString();
+                txtCapacity.Text = ((int)Math.Floor(editingVehicle.CapacityKg)).ToString();
 
                 btnSubmit.Text = "Update";
             }

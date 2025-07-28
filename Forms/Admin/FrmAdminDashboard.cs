@@ -66,6 +66,34 @@ namespace eShift.Forms.Admin
             LoadForm(new FrmAdminManageCustomers());
         }
 
+        private void btnSidePanelmanageInvoice_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminManageInvoice());
+        }
+
+        private void btnSidePanelReport_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmAdminReports());
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show(
+                "Are you sure you want to log out?",
+                "Confirm Logout",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                
+            this.Hide();
+            var loginForm = new FrmLogin(); 
+            loginForm.Show();
+            }
+        }
+
+
         // This method loads the user name and user type 
         //private void LoadUserName(string email)
         //{
@@ -86,5 +114,5 @@ namespace eShift.Forms.Admin
         //}
     }
 
-   
-    }
+
+}

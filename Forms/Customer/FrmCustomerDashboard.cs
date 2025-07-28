@@ -1,5 +1,6 @@
 ﻿using eShift.Business.Interface;
 using eShift.Business.Services;
+using eShift.Forms.Customer;
 using eShift.Model;
 using eShift.Repository.Interface;
 using eShift.Repository.Services;
@@ -23,10 +24,7 @@ namespace eShift.Forms
         }
 
 
-        private void btnSidePanelDashboard_Click(object sender, EventArgs e)
-        {
-            LoadForm(new FrmCustomerProfile(_userEmail));
-        }
+     
 
         private void btnSidePanelMyJobs_Click(object sender, EventArgs e)
         {
@@ -35,7 +33,7 @@ namespace eShift.Forms
 
         private void btnSidePanelCustomers_Click(object sender, EventArgs e)
         {
-            LoadForm(new FrmCustomer());
+          
         }
 
         private void FrmCustomerDashboard_Load(object sender, EventArgs e)
@@ -58,9 +56,19 @@ namespace eShift.Forms
         // logout button action
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            FrmLogin loginForm = new FrmLogin();
-            loginForm.Show();
-            this.Close();
+            var confirmResult = MessageBox.Show(
+            "Are you sure you want to log out?",
+            "Confirm Logout",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+
+                this.Hide();
+                var loginForm = new FrmLogin();
+                loginForm.Show();
+            }
         }
 
         // Helper Methods
@@ -96,6 +104,24 @@ namespace eShift.Forms
             }
         }
 
+        private void btnSidePanelDashboard_Click(object sender, EventArgs e)
+        {
+            LoadForm(new CustomerJobCreateUpdateForm(_user.UserId.ToString()));
+        }
 
+        private void btnMyProfile_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmCustomerProfile(_userEmail));
+        }
+
+        private void btnMyJobs_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmCustomerJobs(_user.UserId));
+        }
+
+        private void btnInvoice_Click(object sender, EventArgs e)
+        {
+            LoadForm(new FrmCustomerInvoice(_user.UserId));
+        }
     }
 }

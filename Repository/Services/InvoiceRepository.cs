@@ -13,9 +13,9 @@ namespace eShift.Repository.Services
         void IInvoiceRepository.AddInvoice(Invoice invoice)
         {
             string query = @"INSERT INTO Invoice 
-                             (InvoiceNumber, JobId, IssueDate, DueDate, SubTotal, TaxRate, TotalAmount, PaidAmount, Status, CreatedAt)
+                             (InvoiceNumber, JobId, IssueDate, DueDate, SubTotal, TaxRate, TotalAmount, PaidAmount, Status, CreatedAt, CustomerId)
                              VALUES 
-                             (@InvoiceNumber, @JobId, @IssueDate, @DueDate, @SubTotal, @TaxRate, @TotalAmount, @PaidAmount, @Status, @CreatedAt)";
+                             (@InvoiceNumber, @JobId, @IssueDate, @DueDate, @SubTotal, @TaxRate, @TotalAmount, @PaidAmount, @Status, @CreatedAt, @CustomerId)";
 
             using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -30,6 +30,7 @@ namespace eShift.Repository.Services
                 cmd.Parameters.AddWithValue("@PaidAmount", invoice.PaidAmount);
                 cmd.Parameters.AddWithValue("@Status", invoice.Status.ToString());
                 cmd.Parameters.AddWithValue("@CreatedAt", invoice.CreatedAt);
+                cmd.Parameters.AddWithValue("@CustomerId", invoice.CustomerId);
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -48,7 +49,7 @@ namespace eShift.Repository.Services
             query.Append("TaxRate = @TaxRate, ");
             query.Append("TotalAmount = @TotalAmount, ");
             query.Append("Status = @Status, ");
-
+            query.Append("CustomerId = @CustomerId, ");
             query.Append("UpdatedAt = SYSDATETIME() ");
             query.Append("WHERE InvoiceId = @InvoiceId");
 
@@ -61,6 +62,7 @@ namespace eShift.Repository.Services
                 cmd.Parameters.AddWithValue("@DueDate", invoice.DueDate);
                 cmd.Parameters.AddWithValue("@SubTotal", invoice.SubTotal);
                 cmd.Parameters.AddWithValue("@TaxRate", invoice.TaxRate);
+                cmd.Parameters.AddWithValue("@CustomerId", invoice.CustomerId);
                 cmd.Parameters.AddWithValue("@TotalAmount", invoice.TotalAmount);
                 cmd.Parameters.AddWithValue("@Status", invoice.Status.ToString());
                 cmd.Parameters.AddWithValue("@InvoiceId", invoice.InvoiceId);
@@ -103,6 +105,7 @@ namespace eShift.Repository.Services
                         InvoiceId = Convert.ToInt32(reader["InvoiceId"]),
                         InvoiceNumber = reader["InvoiceNumber"].ToString(),
                         JobId = Convert.ToInt32(reader["JobId"]),
+                        CustomerId = Convert.ToInt32(reader["CustomerId"]),
                         IssueDate = Convert.ToDateTime(reader["IssueDate"]),
                         DueDate = Convert.ToDateTime(reader["DueDate"]),
                         SubTotal = Convert.ToDecimal(reader["SubTotal"]),
@@ -137,6 +140,7 @@ namespace eShift.Repository.Services
                         InvoiceId = Convert.ToInt32(reader["InvoiceId"]),
                         InvoiceNumber = reader["InvoiceNumber"].ToString(),
                         JobId = Convert.ToInt32(reader["JobId"]),
+                        CustomerId = Convert.ToInt32(reader["CustomerId"]),
                         IssueDate = Convert.ToDateTime(reader["IssueDate"]),
                         DueDate = Convert.ToDateTime(reader["DueDate"]),
                         SubTotal = Convert.ToDecimal(reader["SubTotal"]),
@@ -182,5 +186,56 @@ namespace eShift.Repository.Services
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public int GetLastInvoiceId()
+        {
+            using (var conn = new SqlConnection(DbConst.ConnectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("SELECT ISNULL(MAX(InvoiceId), 0) FROM Invoice", conn);
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+
+        public List<Invoice> GetInvoicesByCustomerId(int customerId)
+        {
+            var invoices = new List<Invoice>();
+            string query = @"SELECT * FROM Invoice 
+                     WHERE CustomerId = @CustomerId 
+                     ORDER BY IssueDate DESC";
+
+            using (SqlConnection conn = new SqlConnection(DbConst.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@CustomerId", customerId);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        invoices.Add(new Invoice
+                        {
+                            InvoiceId = Convert.ToInt32(reader["InvoiceId"]),
+                            InvoiceNumber = reader["InvoiceNumber"].ToString(),
+                            JobId = Convert.ToInt32(reader["JobId"]),
+                            IssueDate = Convert.ToDateTime(reader["IssueDate"]),
+                            DueDate = Convert.ToDateTime(reader["DueDate"]),
+                            SubTotal = Convert.ToDecimal(reader["SubTotal"]),
+                            TaxRate = Convert.ToDecimal(reader["TaxRate"]),
+                            TotalAmount = Convert.ToDecimal(reader["TotalAmount"]),
+                            PaidAmount = Convert.ToDecimal(reader["PaidAmount"]),
+                            Status = Enum.TryParse(reader["Status"].ToString(), true, out InvoiceStatus statusVal) ? statusVal : InvoiceStatus.Draft,
+                            CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                            UpdatedAt = reader["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["UpdatedAt"]) : (DateTime?)null,
+                            CustomerId = Convert.ToInt32(reader["CustomerId"])
+                        });
+                    }
+                }
+            }
+
+            return invoices;
+        }
+
     }
 }
