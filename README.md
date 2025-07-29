@@ -53,7 +53,20 @@ eShift is a comprehensive desktop application designed to streamline the managem
 
 ## Database Setup
 
-The application is configured to connect to a local SQL Server database named `eShiftDB` using integrated security.
+The application is configured to connect to a local SQL Server database named `eShiftDB` using integrated security. You can set up the database in one of two ways:
+
+**Option 1: Restore from Backup**
+
+1.  **Locate the Backup File:**
+    - A database backup file named `eShiftDB.bak` is located in the `Database/` folder of this project.
+
+2.  **Restore the Database:**
+    - Open SQL Server Management Studio (SSMS).
+    - Right-click on the "Databases" node and select "Restore Database...".
+    - Select "Device" and click the "..." button to locate and add the `eShiftDB.bak` file.
+    - Click "OK" to restore the database. This will create the `eShiftDB` database with all the necessary tables and data.
+
+**Option 2: Manual Setup**
 
 1.  **Create the Database:**
     - Open SQL Server Management Studio (SSMS) or use the `sqlcmd` utility.
@@ -63,8 +76,8 @@ The application is configured to connect to a local SQL Server database named `e
       ```
 
 2.  **Create Database Tables:**
-    - You will need to create the necessary tables for the application to function. The schema can be inferred from the models in the `Model/` directory (`User.cs`, `Job.cs`, `Vehicle.cs`, etc.).
-   
+    - A script file named `scripts.sql` is located in the `Database/` folder.
+    - Open this file in SSMS and execute the script against the `eShiftDB` database to create all the necessary tables.
 
 3.  **Verify Connection String:**
     - The connection string is hardcoded in the `Utilities/DbConst.cs` file.
@@ -79,12 +92,18 @@ The application is configured to connect to a local SQL Server database named `e
 ## How to Use
 
 1.  **Run the Application:**
-    - Click the "Start" button in Visual Studio to build and run the project.
+    - Press `F5` or click the "Start" button in Visual Studio to build and run the project.
 
 2.  **Login / Register:**
     - The application will start with the **Login** screen (`FrmLogin`).
-    - New customers can create an account using the **Register** form (`FrmRegister`).
-    
+    - If you restored the database from the backup file, you can use the following credentials to test the system:
+        - **Admin User:**
+            - **Email:** `admin@eshift.com`
+            - **Password:** `Pass1234#`
+        - **Customer User:**
+            - **Email:** `testcustomer@eshift.com`
+            - **Password:** `Pass1234#`
+    - If you set up the database manually, you will need to register a new customer account or manually insert user records into the `Users` table.
 
 3.  **Navigate the Application:**
     - Based on the user's role (Admin or Customer), the appropriate dashboard will be displayed after a successful login, granting access to the features listed above.
