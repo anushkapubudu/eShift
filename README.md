@@ -40,7 +40,7 @@ eShift is a comprehensive desktop application designed to streamline the managem
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/anushkapubudu/eShift.git
     ```
 2.  **Open in Visual Studio:**
     - Open Visual Studio.
